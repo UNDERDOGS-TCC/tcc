@@ -19,7 +19,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'object-curly-spacing': ['error', 'never'],
-    indent: ['error', 2],
+    indent: 'off',
     'linebreak-style': 'off',
     quotes: ['error', 'single'],
     semi: 'off',

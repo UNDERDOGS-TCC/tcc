@@ -1,8 +1,9 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 const Home: React.FC = () => {
+  const [serviceType, setServiceType] = useState('');
   const navigation = useNavigation();
 
   return (
@@ -34,7 +35,12 @@ const Home: React.FC = () => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Services' as never);
+          navigation.navigate(
+            'Services' as never,
+            {
+              service: serviceType,
+            } as never,
+          );
         }}
         activeOpacity={0.5}
         style={{
@@ -46,6 +52,7 @@ const Home: React.FC = () => {
       >
         <Text style={{color: 'black'}}>Ir para Services</Text>
       </TouchableOpacity>
+      <TextInput onChangeText={setServiceType} value={serviceType} />
     </View>
   );
 };
