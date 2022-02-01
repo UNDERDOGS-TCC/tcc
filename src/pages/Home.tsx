@@ -32,6 +32,20 @@ const Home: React.FC = () => {
       >
         <Text style={{color: 'black'}}>Ir para signup</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Services' as never);
+        }}
+        activeOpacity={0.5}
+        style={{
+          paddingHorizontal: 30,
+          paddingVertical: 20,
+          backgroundColor: '#23aeff',
+          borderRadius: 10,
+        }}
+      >
+        <Text style={{color: 'black'}}>Ir para Services</Text>
+      </TouchableOpacity>
     </View>
   );
 };
