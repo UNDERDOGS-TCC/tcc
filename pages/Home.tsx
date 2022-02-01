@@ -1,18 +1,22 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
-
-      <Text style={{
-        color: 'black',
-        paddingVertical: 20}}>
-          Eu sou a Home
-        </Text>
+    <View
+      style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}
+    >
+      <Text
+        style={{
+          color: 'black',
+          paddingVertical: 20,
+        }}
+      >
+        Eu sou a Home
+      </Text>
 
       <TouchableOpacity
         onPress={() => {
@@ -23,10 +27,10 @@ const Home: React.FC = () => {
           paddingHorizontal: 30,
           paddingVertical: 20,
           backgroundColor: '#23aeff',
-          borderRadius: 10}}>
-
+          borderRadius: 10,
+        }}
+      >
         <Text style={{color: 'black'}}>Ir para signup</Text>
-
       </TouchableOpacity>
     </View>
   );
