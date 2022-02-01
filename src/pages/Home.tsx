@@ -1,9 +1,8 @@
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import React, {useState} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 const Home: React.FC = () => {
-  const [serviceType, setServiceType] = useState('');
   const navigation = useNavigation();
 
   return (
@@ -38,7 +37,7 @@ const Home: React.FC = () => {
           navigation.navigate(
             'Services' as never,
             {
-              service: serviceType,
+              service: 'police',
             } as never,
           );
         }}
@@ -46,13 +45,50 @@ const Home: React.FC = () => {
         style={{
           paddingHorizontal: 30,
           paddingVertical: 20,
-          backgroundColor: '#23aeff',
+          backgroundColor: '#444647',
           borderRadius: 10,
         }}
       >
-        <Text style={{color: 'black'}}>Ir para Services</Text>
+        <Text style={{color: 'black'}}>Ir para policias</Text>
       </TouchableOpacity>
-      <TextInput onChangeText={setServiceType} value={serviceType} />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(
+            'Services' as never,
+            {
+              service: 'ambulance',
+            } as never,
+          );
+        }}
+        activeOpacity={0.5}
+        style={{
+          paddingHorizontal: 30,
+          paddingVertical: 20,
+          backgroundColor: '#2723ff',
+          borderRadius: 10,
+        }}
+      >
+        <Text style={{color: 'black'}}>Ir para ambulancias</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(
+            'Services' as never,
+            {
+              service: 'fireman',
+            } as never,
+          );
+        }}
+        activeOpacity={0.5}
+        style={{
+          paddingHorizontal: 30,
+          paddingVertical: 20,
+          backgroundColor: '#ff2323',
+          borderRadius: 10,
+        }}
+      >
+        <Text style={{color: 'black'}}>Ir para bombeiros</Text>
+      </TouchableOpacity>
     </View>
   );
 };
