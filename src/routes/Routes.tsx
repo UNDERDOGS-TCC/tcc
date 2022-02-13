@@ -12,9 +12,9 @@ const Routes: React.FC = () => {
       screenOptions={{
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: 'rgba(0, 52, 107, 1)',
+          backgroundColor: '#f2f2f2',
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#f2f2f2',
         headerTitleStyle: {
           fontFamily: 'Roboto',
           fontWeight: '400',

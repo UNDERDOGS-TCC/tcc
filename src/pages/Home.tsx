@@ -1,21 +1,39 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-const Home: React.FC = () => {
+interface HomeProps {
+  service: 'usuario';
+}
+
+const Home: React.FC<HomeProps> = ({service}) => {
   const navigation = useNavigation();
+  const images = {
+    usuario: require('../../assets/usuario.png'),
+  };
 
   return (
-    <View
-      style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}
+    <View style={{}}
     >
       <Text
         style={{
           color: 'black',
-          paddingVertical: 20,
+          paddingVertical: 40,
+          padding: 60,
         }}
       >
-        Eu sou a Home
+        Good Morning{"\n"}
+        <Text
+        style={{
+          color: 'black',
+          paddingVertical: 20,
+          fontSize: 25,
+          fontWeight: 'bold',
+        }}
+        >
+        Igor Ferráz
+        <Image style={styles.homeImageUser} source={images.usuario} />
+      </Text>
       </Text>
 
       <TouchableOpacity
@@ -94,3 +112,10 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  homeImageUser: {
+    width: '20%',
+    height: '70%',
+  },
+});
