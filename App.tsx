@@ -34,7 +34,7 @@ const App: React.FC = () => {
   return (
     <NavigationContainer>
       <Routes />
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
     </NavigationContainer>
   );
 };

@@ -1,31 +1,27 @@
 export const policeCards = [
   {
     id: '1',
-    title: 'Boletim de ocorrência',
-    icon: 'file-document-edit-outline',
-    size: 100,
-    color: 'black',
+    title: 'Boletim de Ocorrência',
+    description: 'Registre seu boletim de ocorrência',
+    key: 'bo',
   },
   {
     id: '2',
-    title: 'Denúncias',
-    icon: 'alert-outline',
-    size: 100,
-    color: 'black',
+    title: 'Orientações de segurança',
+    description: 'Orientações na prevenção em diversas situações',
+    key: 'security',
   },
   {
     id: '3',
-    title: 'Orientações de segurança',
-    icon: 'security',
-    size: 100,
-    color: 'black',
+    title: 'Denúncias',
+    description: 'Denuncie atravez do nosso portal',
+    key: 'report',
   },
   {
     id: '4',
     title: 'Chat',
-    icon: 'chat-processing-outline',
-    size: 100,
-    color: 'black',
+    description: 'Inicie uma conversa atravez do nosso chat',
+    key: 'chat',
   },
 ];
 
