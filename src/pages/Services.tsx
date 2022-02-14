@@ -1,9 +1,9 @@
-import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
-import CallService from '../components/CallService';
+import {SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import CallService from '../components/CallService';
 import CardService from '../components/CardService';
-import {policeCards, ambulanceCards, firemanCards} from '../utils/service-cards';
+import {ambulanceCards, firemanCards, policeCards} from '../utils/service-cards';
 
 interface ServicesProps {
   service: 'police' | 'ambulance' | 'fireman';
@@ -19,47 +19,58 @@ const Services: React.FC = () => {
         params.service === 'police'
           ? 'Polícia'
           : params.service === 'ambulance'
-          ? 'Ambulância'
+          ? 'Samu'
           : 'Bombeiro',
+      headerStyle: {
+        backgroundColor: '#fff',
+      },
+      headerTintColor: '#000',
+      headerTitleStyle: {
+        fontFamily: 'Archivo_700Bold',
+      },
+      headerShadowVisible: false,
     });
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <CallService
-        service={params.service}
-        buttonTitle={
-          params.service === 'police'
-            ? 'Acionar polícia'
-            : params.service === 'ambulance'
-            ? 'Acionar SAMU'
-            : 'Acionar bombeiro'
-        }
-      />
-      <View style={styles.otherServicesContainer}>
+      <ScrollView>
+        <CallService service={params.service} />
         <Text style={styles.otherServicesText}>Outros Serviços</Text>
-      </View>
-      <View style={styles.cardsContainer}>
-        <FlatList
-          data={
-            params.service === 'police'
-              ? policeCards
-              : params.service === 'ambulance'
-              ? ambulanceCards
-              : firemanCards
-          }
-          numColumns={2}
-          keyExtractor={(item) => item.id}
-          renderItem={({item}) => (
+
+        {params.service === 'police' &&
+          policeCards.map((item) => (
             <CardService
-              cardTitle={item.title}
-              iconColor={item.color}
-              iconSize={item.size}
-              iconName={item.icon as 'file-document-edit-outline'}
+              key={item.id}
+              icon={item.key as any}
+              title={item.title}
+              description={item.description}
+              service={params.service}
             />
-          )}
-        />
-      </View>
+          ))}
+
+        {params.service === 'ambulance' &&
+          ambulanceCards.map((item) => (
+            <CardService
+              key={item.id}
+              icon={item.key as any}
+              title={item.title}
+              description={item.description}
+              service={params.service}
+            />
+          ))}
+
+        {params.service === 'fireman' &&
+          firemanCards.map((item) => (
+            <CardService
+              key={item.id}
+              icon={item.key as any}
+              title={item.title}
+              description={item.description}
+              service={params.service}
+            />
+          ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -71,22 +82,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  otherServicesContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 20,
-  },
   otherServicesText: {
-    fontFamily: 'Roboto',
-    fontStyle: 'italic',
-    fontWeight: '600',
-    fontSize: 25,
-    textShadowColor: 'black',
-    textShadowOffset: {width: -1, height: 0},
-    textShadowRadius: 2,
-  },
-  cardsContainer: {
-    flex: 1,
-    marginBottom: 20,
+    fontFamily: 'Archivo_700Bold',
+    fontSize: 24,
+    marginLeft: '5%',
   },
 });

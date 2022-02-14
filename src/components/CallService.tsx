@@ -1,113 +1,86 @@
-import {Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import React from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 interface CallServiceProps {
-  buttonTitle: string;
-  service: 'police' | 'ambulance' | 'fireman';
+  service: string;
 }
 
-const CallService: React.FC<CallServiceProps> = ({service, buttonTitle}) => {
+const CallService: React.FC<CallServiceProps> = ({service}) => {
   const images = {
-    police: require('../../assets/policia_civil_brasao.png'),
-    ambulance: require('../../assets/samu_brasao.png'),
-    fireman: require('../../assets/bombeiro_civil_brasao.png'),
+    police: require('../../assets/carro-policia.png'),
+    ambulance: require('../../assets/carro-ambulancia.png'),
+    fireman: require('../../assets/bombeiro-carro.png'),
   };
 
   return (
-    <>
+    <View style={styles.serviceButtonContainer}>
       {service === 'police' && (
         <TouchableOpacity
           activeOpacity={0.8}
-          style={[styles.callServiceButtonContainer, styles.callServiceButtonBackgroudBlack]}
+          style={[styles.serviceButton, {backgroundColor: '#C1C1C1'}]}
         >
-          <Text style={[styles.callServiceButtonFont, styles.callServiceButtonFontPolice]}>
-            {buttonTitle}
-          </Text>
-          <Image style={styles.callServiceImagePolice} source={images[service]} />
+          <Text style={styles.serviceButtonText}>Chamar Polícia</Text>
+          <View style={styles.serviceButtonIcon}>
+            <Image style={{height: '100%', width: '100%'}} source={images[service]} />
+          </View>
         </TouchableOpacity>
       )}
 
       {service === 'ambulance' && (
         <TouchableOpacity
           activeOpacity={0.8}
-          style={[styles.callServiceButtonContainer, styles.callServiceButtonBackgroudBlue]}
+          style={[styles.serviceButton, {backgroundColor: '#B6DCF1'}]}
         >
-          <Text style={[styles.callServiceButtonFont, styles.callServiceButtonFontAmbulance]}>
-            {buttonTitle}
-          </Text>
-          <Image style={styles.callServiceImageAmbulance} source={images[service]} />
+          <View style={[styles.serviceButtonIcon, {transform: [{scaleX: -1}]}]}>
+            <Image style={{height: '80%', width: '80%'}} source={images[service]} />
+          </View>
+          <Text style={styles.serviceButtonText}>Chamar Samu</Text>
         </TouchableOpacity>
       )}
 
       {service === 'fireman' && (
         <TouchableOpacity
           activeOpacity={0.8}
-          style={[styles.callServiceButtonContainer, styles.callServiceButtonBackgroudRed]}
+          style={[styles.serviceButton, {backgroundColor: '#FDBFBF'}]}
         >
-          <Text style={[styles.callServiceButtonFont, styles.callServiceButtonFontFireman]}>
-            {buttonTitle}
-          </Text>
-          <Image style={styles.callServiceImageFireman} source={images[service]} />
+          <Text style={styles.serviceButtonText}>Chamar Bombeiro</Text>
+          <View style={[styles.serviceButtonIcon, {transform: [{scaleX: -1}]}]}>
+            <Image style={{height: '80%', width: '80%'}} source={images[service]} />
+          </View>
         </TouchableOpacity>
       )}
-    </>
+    </View>
   );
 };
 
 export default CallService;
 
 const styles = StyleSheet.create({
-  callServiceButtonContainer: {
-    marginVertical: 10,
-    marginHorizontal: 10,
-    borderRadius: 4,
-    borderWidth: 4,
-    height: '20%',
-    justifyContent: 'space-evenly',
+  serviceButtonContainer: {
+    width: '100%',
+    height: 200,
+    justifyContent: 'center',
     alignItems: 'center',
-    display: 'flex',
+  },
+  serviceButton: {
+    width: '90%',
+    height: '80%',
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
   },
-  callServiceButtonBackgroudRed: {
-    backgroundColor: '#F41011',
-    borderColor: 'rgba(255, 0, 0, 0.2)',
+  serviceButtonIcon: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
-  callServiceButtonBackgroudBlue: {
-    backgroundColor: '#0C62AD',
-    borderColor: 'rgba(12, 98, 173, 0.24)',
-  },
-  callServiceButtonBackgroudBlack: {
-    backgroundColor: '#3A3B3C',
-    borderColor: 'rgba(0, 0, 0, 0.28)',
-  },
-  callServiceButtonFont: {
-    fontFamily: 'Roboto',
-    fontStyle: 'italic',
-    fontWeight: '800',
-    color: '#fff',
-    textShadowColor: 'black',
-    textShadowOffset: {width: -1, height: 0},
-    textShadowRadius: 20,
-  },
-  callServiceButtonFontPolice: {
-    fontSize: 35,
-  },
-  callServiceButtonFontAmbulance: {
-    fontSize: 27,
-  },
-  callServiceButtonFontFireman: {
-    fontSize: 30,
-  },
-  callServiceImagePolice: {
-    width: '20%',
-    height: '70%',
-  },
-  callServiceImageAmbulance: {
-    width: '25%',
-    height: '70%',
-  },
-  callServiceImageFireman: {
-    width: '25%',
-    height: '71%',
+  serviceButtonText: {
+    flex: 1,
+    color: '#383838',
+    fontFamily: 'Archivo_700Bold',
+    fontSize: 34,
+    textAlign: 'center',
+    marginHorizontal: 10,
   },
 });
