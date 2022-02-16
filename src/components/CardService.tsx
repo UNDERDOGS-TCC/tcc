@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import Loader from './Loader';
 
 interface CardServiceParams {
   icon: 'bo' | 'security' | 'report' | 'chat' | 'vistoria' | 'emergency' | 'health';
@@ -9,6 +10,8 @@ interface CardServiceParams {
 }
 
 const CardService: React.FC<CardServiceParams> = ({title, description, icon, service}) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const icons = {
     bo: require('../../assets/boletim-de-ocorrencia.png'),
     security: require('../../assets/orientacao-de-seguranca.png'),
@@ -19,10 +22,19 @@ const CardService: React.FC<CardServiceParams> = ({title, description, icon, ser
     health: require('../../assets/saude.png'),
   };
 
+  const handleTouch = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  };
+
   return (
     <View style={styles.cardsContainer}>
+      <Loader loading={isLoading} />
       {service === 'police' && (
         <TouchableOpacity
+          onPress={() => handleTouch()}
           activeOpacity={0.6}
           style={[styles.cardService, {backgroundColor: '#ECECEC'}]}
         >
