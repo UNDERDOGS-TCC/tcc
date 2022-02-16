@@ -12,13 +12,13 @@ const Routes: React.FC = () => {
       screenOptions={{
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: 'rgba(0, 52, 107, 1)',
+          backgroundColor: '#fff',
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#000',
         headerTitleStyle: {
-          fontFamily: 'Roboto',
-          fontWeight: '400',
+          fontFamily: 'Archivo_700Bold',
         },
+        headerShadowVisible: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}
     >

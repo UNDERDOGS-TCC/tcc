@@ -7,7 +7,13 @@ const Home: React.FC = () => {
 
   return (
     <View
-      style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        backgroundColor: '#fff',
+      }}
     >
       <Text
         style={{

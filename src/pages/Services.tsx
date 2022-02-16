@@ -21,14 +21,6 @@ const Services: React.FC = () => {
           : params.service === 'ambulance'
           ? 'Samu'
           : 'Bombeiro',
-      headerStyle: {
-        backgroundColor: '#fff',
-      },
-      headerTintColor: '#000',
-      headerTitleStyle: {
-        fontFamily: 'Archivo_700Bold',
-      },
-      headerShadowVisible: false,
     });
   }, []);
 
