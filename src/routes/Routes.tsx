@@ -1,10 +1,10 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import Home from '../pages/Home';
 import Services from '../pages/Services';
 import Signup from '../pages/Signup';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const Routes: React.FC = () => {
   return (
@@ -19,6 +19,7 @@ const Routes: React.FC = () => {
           fontFamily: 'Roboto',
           fontWeight: '400',
         },
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}
     >
       <Stack.Screen name="Home" component={Home} />
