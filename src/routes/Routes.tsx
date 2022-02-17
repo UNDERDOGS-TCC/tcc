@@ -1,6 +1,7 @@
 import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import Home from '../pages/Home';
+import Map from '../pages/Map';
 import Services from '../pages/Services';
 import Signup from '../pages/Signup';
 
@@ -25,6 +26,7 @@ const Routes: React.FC = () => {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="Services" component={Services} />
+      <Stack.Screen name="Map" component={Map} />
     </Stack.Navigator>
   );
 };

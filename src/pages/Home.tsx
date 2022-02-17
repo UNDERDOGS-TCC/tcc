@@ -1,9 +1,19 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {requestForegroundPermissionsAsync} from 'expo-location';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
+
+  const requestLocationPermissions = async () => {
+    const response = await requestForegroundPermissionsAsync();
+    if (!response.granted) return;
+  };
+
+  useEffect(() => {
+    requestLocationPermissions();
+  }, []);
 
   return (
     <View
