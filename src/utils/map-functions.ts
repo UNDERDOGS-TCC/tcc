@@ -20,7 +20,7 @@ export const fitAllMarkers = (originCoords: LatLng, mapRef: RefObject<MapView>) 
     latitude: originCoords.latitude,
     longitude: originCoords.longitude,
   };
-  const destination = {latitude: -23.573474, longitude: -46.749583};
+  const destination = {latitude: -23.475088, longitude: -46.568842};
 
   if (Platform.OS === 'ios') {
     mapRef?.current?.fitToSuppliedMarkers(['user', 'car'], {

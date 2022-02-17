@@ -2,6 +2,7 @@ import {LocationObject} from 'expo-location';
 import React, {RefObject} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import MapView, {LatLng, MapEvent, Marker} from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 
 interface MapComponentProps {
   initialLocation: LocationObject;
@@ -22,7 +23,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
   };
 
   // TODO: destination vai vir da API
-  const carLocation = {latitude: -23.573474, longitude: -46.749583};
+  const carLocation = {latitude: -23.475088, longitude: -46.568842};
 
   return (
     <MapView
@@ -31,18 +32,18 @@ const MapComponent: React.FC<MapComponentProps> = ({
       onMapReady={() => fitAllMarkers(userLocation, mapRef)}
       style={styles.mapContainer}
     >
-      {/* TODO: uncomment this part when we start to test polylines
+      {/* TODO: uncomment this part when we start to test polylines 
       <MapViewDirections
-        origin={{latitude: -23.573474, longitude: -46.749583}}
+        origin={carLocation}
         destination={{
-          latitude: origin.latitude,
-          longitude: origin.longitude,
+          latitude: userLocation.latitude,
+          longitude: userLocation.longitude,
         }}
         apikey={GOOGLE_MAPS_API_KEY}
         strokeWidth={3}
         language="pt-BR"
         precision="high"
-      /> */}
+      />*/}
       <Marker
         identifier="user"
         coordinate={{
@@ -63,7 +64,12 @@ const MapComponent: React.FC<MapComponentProps> = ({
           onPress={(e: MapEvent) => centerMapOnUser(e.nativeEvent.coordinate, mapRef)}
           identifier="car"
           coordinate={carLocation}
-        />
+        >
+          <Image
+            style={styles.policeCarContainer}
+            source={require('../../assets/police_car_above.png')}
+          />
+        </Marker>
       )}
     </MapView>
   );
@@ -76,6 +82,10 @@ const styles = StyleSheet.create({
   userImageContainer: {
     height: 50,
     width: 50,
+  },
+  policeCarContainer: {
+    height: 50,
+    width: 100,
   },
 });
 
