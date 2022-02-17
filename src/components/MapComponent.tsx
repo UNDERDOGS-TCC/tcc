@@ -2,7 +2,6 @@ import {LocationObject} from 'expo-location';
 import React, {RefObject} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import MapView, {LatLng, MapEvent, Marker} from 'react-native-maps';
-import MapViewDirections from 'react-native-maps-directions';
 
 interface MapComponentProps {
   initialLocation: LocationObject;
@@ -17,21 +16,23 @@ const MapComponent: React.FC<MapComponentProps> = ({
   centerMapOnUser,
   fitAllMarkers,
 }) => {
-  const GOOGLE_MAPS_API_KEY = 'AIzaSyDtdZaIjYsfRsHz8CpV5I54mTPwXXgEju0';
-  const origin = {
+  const userLocation = {
     latitude: initialLocation.coords.latitude,
     longitude: initialLocation.coords.longitude,
   };
-  const destination = {latitude: -23.573474, longitude: -46.749583};
+
+  // TODO: destination vai vir da API
+  const carLocation = {latitude: -23.573474, longitude: -46.749583};
 
   return (
     <MapView
       ref={mapRef}
       mapType="mutedStandard"
-      onMapReady={() => fitAllMarkers(origin, mapRef)}
+      onMapReady={() => fitAllMarkers(userLocation, mapRef)}
       style={styles.mapContainer}
     >
-      {/* <MapViewDirections
+      {/* TODO: uncomment this part when we start to test polylines
+      <MapViewDirections
         origin={{latitude: -23.573474, longitude: -46.749583}}
         destination={{
           latitude: origin.latitude,
@@ -45,8 +46,8 @@ const MapComponent: React.FC<MapComponentProps> = ({
       <Marker
         identifier="user"
         coordinate={{
-          latitude: origin.latitude,
-          longitude: origin.longitude,
+          latitude: userLocation.latitude,
+          longitude: userLocation.longitude,
         }}
         onPress={(e: MapEvent) => centerMapOnUser(e.nativeEvent.coordinate, mapRef)}
       >
@@ -57,11 +58,13 @@ const MapComponent: React.FC<MapComponentProps> = ({
           />
         </View>
       </Marker>
-      <Marker
-        onPress={(e: MapEvent) => centerMapOnUser(e.nativeEvent.coordinate, mapRef)}
-        identifier="car"
-        coordinate={{latitude: -23.573474, longitude: -46.749583}}
-      />
+      {carLocation && (
+        <Marker
+          onPress={(e: MapEvent) => centerMapOnUser(e.nativeEvent.coordinate, mapRef)}
+          identifier="car"
+          coordinate={carLocation}
+        />
+      )}
     </MapView>
   );
 };

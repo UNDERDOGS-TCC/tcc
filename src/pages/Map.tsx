@@ -14,7 +14,7 @@ interface MapProps {
 
 const Map: React.FC = () => {
   const {params} = useRoute() as {params: MapProps};
-  const initialLocation = params.location;
+  const userLocation = params.location;
   const navigation = useNavigation();
 
   const mapRef = useRef<MapView>(null);
@@ -32,14 +32,10 @@ const Map: React.FC = () => {
       <MapComponent
         centerMapOnUser={centerMapOnUser}
         mapRef={mapRef}
-        initialLocation={initialLocation}
+        initialLocation={userLocation}
         fitAllMarkers={fitAllMarkers}
       />
-      <CenterMapButton
-        mapRef={mapRef}
-        initialLocation={initialLocation}
-        fitAllMarkers={fitAllMarkers}
-      />
+      <CenterMapButton mapRef={mapRef} userLocation={userLocation} fitAllMarkers={fitAllMarkers} />
     </SafeAreaView>
   );
 };

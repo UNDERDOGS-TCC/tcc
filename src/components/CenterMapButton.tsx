@@ -5,18 +5,14 @@ import MapView, {LatLng} from 'react-native-maps';
 
 interface CenterMapButtonProps {
   fitAllMarkers: (origin: LatLng, mapRef: RefObject<MapView>) => void;
-  initialLocation: LocationObject;
+  userLocation: LocationObject;
   mapRef: RefObject<MapView>;
 }
 
-const CenterMapButton: React.FC<CenterMapButtonProps> = ({
-  fitAllMarkers,
-  initialLocation,
-  mapRef,
-}) => {
+const CenterMapButton: React.FC<CenterMapButtonProps> = ({fitAllMarkers, userLocation, mapRef}) => {
   const location = {
-    latitude: initialLocation.coords.latitude,
-    longitude: initialLocation.coords.longitude,
+    latitude: userLocation.coords.latitude,
+    longitude: userLocation.coords.longitude,
   };
 
   return (
