@@ -6,6 +6,7 @@ import {LocationObject} from 'expo-location';
 import CenterMapButton from '../components/CenterMapButton';
 import MapComponent from '../components/MapComponent';
 import {centerMapOnUser, fitAllMarkers} from '../utils/map-functions';
+import MapSearchBar from '../components/MapSearchBar';
 
 interface MapProps {
   service: 'police' | 'ambulance' | 'fireman';
@@ -35,6 +36,7 @@ const Map: React.FC = () => {
         initialLocation={userLocation}
         fitAllMarkers={fitAllMarkers}
       />
+      <MapSearchBar />
       <CenterMapButton mapRef={mapRef} userLocation={userLocation} fitAllMarkers={fitAllMarkers} />
     </SafeAreaView>
   );

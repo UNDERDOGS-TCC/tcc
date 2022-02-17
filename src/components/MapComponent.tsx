@@ -2,7 +2,6 @@ import {LocationObject} from 'expo-location';
 import React, {RefObject} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import MapView, {LatLng, MapEvent, Marker} from 'react-native-maps';
-import MapViewDirections from 'react-native-maps-directions';
 
 interface MapComponentProps {
   initialLocation: LocationObject;
