@@ -31,8 +31,8 @@ const MapComponent: React.FC<MapComponentProps> = ({
       onMapReady={() => fitAllMarkers(userLocation, mapRef)}
       style={styles.mapContainer}
     >
-      {/* TODO: uncomment this part when we start to test polylines 
-      <MapViewDirections
+      {/* TODO: uncomment this part when we start to test polylines  */}
+      {/* <MapViewDirections
         origin={carLocation}
         destination={{
           latitude: userLocation.latitude,
@@ -42,7 +42,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
         strokeWidth={3}
         language="pt-BR"
         precision="high"
-      />*/}
+      /> */}
       <Marker
         identifier="user"
         coordinate={{

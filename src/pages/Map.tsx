@@ -1,12 +1,14 @@
 import React, {useEffect, useRef} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import MapView from 'react-native-maps';
 import {LocationObject} from 'expo-location';
 import CenterMapButton from '../components/CenterMapButton';
 import MapComponent from '../components/MapComponent';
 import {centerMapOnUser, fitAllMarkers} from '../utils/map-functions';
 import MapSearchBar from '../components/MapSearchBar';
+import MapInfos from '../components/MapInfos';
+import {setStatusBarBackgroundColor, setStatusBarTranslucent} from 'expo-status-bar';
 
 interface MapProps {
   service: 'police' | 'ambulance' | 'fireman';
@@ -26,10 +28,14 @@ const Map: React.FC = () => {
       headerTitle: false,
       title: '',
     });
+    if (Platform.OS === 'android') {
+      setStatusBarTranslucent(true);
+      setStatusBarBackgroundColor('transparent', true);
+    }
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <MapComponent
         centerMapOnUser={centerMapOnUser}
         mapRef={mapRef}
@@ -38,7 +44,8 @@ const Map: React.FC = () => {
       />
       <MapSearchBar />
       <CenterMapButton mapRef={mapRef} userLocation={userLocation} fitAllMarkers={fitAllMarkers} />
-    </SafeAreaView>
+      <MapInfos />
+    </View>
   );
 };
 

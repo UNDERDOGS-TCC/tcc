@@ -32,7 +32,7 @@ const CenterMapButton: React.FC<CenterMapButtonProps> = ({fitAllMarkers, userLoc
 const styles = StyleSheet.create({
   centerIconContainer: {
     position: 'absolute',
-    bottom: '5%',
+    bottom: 250,
     left: '82%',
     backgroundColor: '#fff',
     borderRadius: 30,
