@@ -1,16 +1,39 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Alert} from 'react-native';
 import MapInfosRightText from './MapInfosRightText';
 
 const MapInfos: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
+  const navigation = useNavigation();
 
-  const handleCancelButton = () => {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', (e) => handleBackButton(e));
+
+    return unsubscribe;
+  }, []);
+
+  const handleBackButton = (e: any) => {
+    e.preventDefault();
+
+    Alert.alert('Cancelar a busca?', 'Tem certeza que deseja cancelar a busca por uma viatura?', [
+      {
+        text: 'Não',
+        style: 'cancel',
+        onPress: () => {
+          return;
+        },
+      },
+      {text: 'Sim', style: 'destructive', onPress: () => navigation.dispatch(e.data.action)},
+    ]);
+  };
+
+  useEffect(() => {
     setIsSearching(true);
     setTimeout(() => {
       setIsSearching(false);
     }, 3000);
-  };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -33,7 +56,7 @@ const MapInfos: React.FC = () => {
         )}
       </View>
       <TouchableOpacity
-        onPress={() => handleCancelButton()}
+        onPress={() => navigation.goBack()}
         activeOpacity={0.8}
         style={styles.buttonContainer}
       >
