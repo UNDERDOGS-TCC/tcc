@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {setStatusBarBackgroundColor} from 'expo-status-bar';
-import {ActivityIndicator, Modal, View, StyleSheet, Text} from 'react-native';
+import {ActivityIndicator, Modal, View, StyleSheet, Text, Platform} from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 
 interface LoaderProps {
@@ -8,27 +8,20 @@ interface LoaderProps {
 }
 
 const Loader: React.FC<LoaderProps> = ({loading}) => {
-  const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
-    setIsLoading(loading);
-
-    if (!loading) {
-      setStatusBarBackgroundColor('#fff', true);
-      NavigationBar.setBackgroundColorAsync('#000');
-    } else {
-      setStatusBarBackgroundColor('#00000040', true);
-      NavigationBar.setBackgroundColorAsync('#000');
+    if (Platform.OS === 'android') {
+      if (!loading) {
+        setStatusBarBackgroundColor('#fff', true);
+        NavigationBar.setBackgroundColorAsync('#000');
+      } else {
+        setStatusBarBackgroundColor('#00000040', true);
+        NavigationBar.setBackgroundColorAsync('#000');
+      }
     }
   }, [loading]);
 
   return (
-    <Modal
-      onRequestClose={() => setIsLoading(false)}
-      transparent={true}
-      animationType={'fade'}
-      visible={isLoading}
-    >
+    <Modal transparent={true} animationType={'fade'} visible={loading}>
       <View style={styles.modalBackground}>
         <View style={styles.activityIndicatorWrapper}>
           <ActivityIndicator size="large" color="#00346C" />

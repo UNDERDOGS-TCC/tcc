@@ -1,21 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import Loader from './Loader';
+import * as Location from 'expo-location';
 
 interface CallServiceProps {
   service: string;
 }
 
 const CallService: React.FC<CallServiceProps> = ({service}) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigation = useNavigation();
   const images = {
     police: require('../../assets/carro-policia.png'),
     ambulance: require('../../assets/carro-ambulancia.png'),
     fireman: require('../../assets/bombeiro-carro.png'),
   };
 
+  const handlePress = async () => {
+    setIsLoading(true);
+    const location = await getLocation();
+    setIsLoading(false);
+    navigation.navigate('Map' as never, {service, location} as never);
+  };
+
+  const getLocation = async () => {
+    const {status} = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') return;
+
+    const location = await Location.getCurrentPositionAsync({});
+    return location;
+  };
+
   return (
     <View style={styles.serviceButtonContainer}>
+      <Loader loading={isLoading} />
       {service === 'police' && (
         <TouchableOpacity
+          onPress={() => handlePress()}
           activeOpacity={0.8}
           style={[styles.serviceButton, {backgroundColor: '#C1C1C1'}]}
         >
@@ -28,6 +51,7 @@ const CallService: React.FC<CallServiceProps> = ({service}) => {
 
       {service === 'ambulance' && (
         <TouchableOpacity
+          onPress={() => handlePress()}
           activeOpacity={0.8}
           style={[styles.serviceButton, {backgroundColor: '#B6DCF1'}]}
         >
@@ -40,6 +64,7 @@ const CallService: React.FC<CallServiceProps> = ({service}) => {
 
       {service === 'fireman' && (
         <TouchableOpacity
+          onPress={() => handlePress()}
           activeOpacity={0.8}
           style={[styles.serviceButton, {backgroundColor: '#FDBFBF'}]}
         >
