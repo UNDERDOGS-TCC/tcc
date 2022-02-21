@@ -1,8 +1,9 @@
-import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/stack';
 //import { createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
+import Map from '../pages/Map';
 import Services from '../pages/Services';
 import Signup from '../pages/Signup';
 
@@ -10,7 +11,6 @@ const Stack = createStackNavigator();
 //const Drawer = createDrawerNavigator();
 
 const Routes: React.FC = () => {
-  
   return (
     <Stack.Navigator
       screenOptions={{
@@ -23,17 +23,17 @@ const Routes: React.FC = () => {
         },
         headerTintColor: '#f2f2f2',
         headerTitleStyle: {
-          fontFamily: 'Roboto',
-          fontWeight: '400',
+          fontFamily: 'Archivo_700Bold',
         },
+        headerShadowVisible: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}
     >
       <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="Services" component={Services} />
- 
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Services" component={Services} />
+      <Stack.Screen name="Map" component={Map} />
     </Stack.Navigator>
   );
 };

@@ -1,6 +1,7 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {requestForegroundPermissionsAsync} from 'expo-location';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
@@ -11,44 +12,54 @@ const Home: React.FC = () => {
     carrobombeiro: require('../../assets/bombeiro-carro.png'),
   };
 
+  const requestLocationPermissions = async () => {
+    const response = await requestForegroundPermissionsAsync();
+    if (!response.granted) return;
+  };
+
+  useEffect(() => {
+    requestLocationPermissions();
+  }, []);
+
   return (
-    <View style={{marginTop: -15}}>  
-      <View style={styles.container}>
-        <Text style={{ color: 'black', paddingVertical: 30, padding: 60 }}> Good Morning{"\n"}
-          <Text style={{ color: 'black', paddingVertical: 20, fontSize: 25, fontWeight: 'bold' }}>Igor Ferráz
-          </Text>
-        </Text>
-        <Image style={styles.homeImageUser} source={images.usuario} />
-      </View>
-      
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate(
-              'Services' as never,
-              {
-                service: 'police',
-              } as never,
-            );
-          }}
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        backgroundColor: '#fff',
+      }}
+    >
+      <Text
+        style={{
+          color: 'black',
+          paddingVertical: 20,
+        }}
+      >
+        Eu sou a Home
+      </Text>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        style={{
+          height: 120,
+          width: 345,
 
-          activeOpacity={0.5}
-          style={{
-            height: 120,
-            width: 345,
-
-            alignSelf:'center',
-            alignItems: 'center',
-            display: 'flex',
-            backgroundColor: '#C1C1C1',
-            borderRadius: 20,
-          }}
-        >
-          <View style={styles.container}>
+          alignSelf: 'center',
+          alignItems: 'center',
+          display: 'flex',
+          backgroundColor: '#C1C1C1',
+          borderRadius: 20,
+        }}
+      >
+        <View style={styles.container}>
           <Image style={styles.ImagePolice} source={images.carropolicia} />
-          <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30,}}>Polícia</Text>
-          </View>
-        </TouchableOpacity>
-        {"\n"}
+          <Text style={{color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30}}>
+            Polícia
+          </Text>
+        </View>
+      </TouchableOpacity>
+      {'\n'}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(
@@ -64,7 +75,7 @@ const Home: React.FC = () => {
           width: 345,
           marginTop: 10,
 
-          alignSelf:'center',
+          alignSelf: 'center',
           alignItems: 'center',
           display: 'flex',
           backgroundColor: '#B6DCF1',
@@ -72,8 +83,8 @@ const Home: React.FC = () => {
         }}
       >
         <View style={styles.container}>
-        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30,}}>Samu</Text>
-        <Image style={styles.ImageAmbulance} source={images.carroambulancia} />
+          <Text style={{color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30}}>Samu</Text>
+          <Image style={styles.ImageAmbulance} source={images.carroambulancia} />
         </View>
       </TouchableOpacity>
 
@@ -92,7 +103,7 @@ const Home: React.FC = () => {
           width: 345,
           marginTop: 10,
 
-          alignSelf:'center',
+          alignSelf: 'center',
           alignItems: 'center',
           display: 'flex',
           backgroundColor: '#FDBFBF',
@@ -100,8 +111,10 @@ const Home: React.FC = () => {
         }}
       >
         <View style={styles.container}>
-        <Image style={styles.ImageFireman} source={images.carrobombeiro} />
-        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30,}}>Bombeiro</Text>
+          <Image style={styles.ImageFireman} source={images.carrobombeiro} />
+          <Text style={{color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30}}>
+            Bombeiro
+          </Text>
         </View>
       </TouchableOpacity>
     </View>
