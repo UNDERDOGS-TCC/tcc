@@ -1,10 +1,16 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {requestForegroundPermissionsAsync} from 'expo-location';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
+  const images = {
+    usuario: require('../../assets/usuario.png'),
+    carropolicia: require('../../assets/carro-policia.png'),
+    carroambulancia: require('../../assets/carro-ambulancia.png'),
+    carrobombeiro: require('../../assets/bombeiro-carro.png'),
+  };
 
   const requestLocationPermissions = async () => {
     const response = await requestForegroundPermissionsAsync();
@@ -33,40 +39,27 @@ const Home: React.FC = () => {
       >
         Eu sou a Home
       </Text>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        style={{
+          height: 120,
+          width: 345,
 
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Signup' as never);
-        }}
-        activeOpacity={0.5}
-        style={{
-          paddingHorizontal: 30,
-          paddingVertical: 20,
-          backgroundColor: '#23aeff',
-          borderRadius: 10,
+          alignSelf: 'center',
+          alignItems: 'center',
+          display: 'flex',
+          backgroundColor: '#C1C1C1',
+          borderRadius: 20,
         }}
       >
-        <Text style={{color: 'black'}}>Ir para signup</Text>
+        <View style={styles.container}>
+          <Image style={styles.ImagePolice} source={images.carropolicia} />
+          <Text style={{color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30}}>
+            Polícia
+          </Text>
+        </View>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate(
-            'Services' as never,
-            {
-              service: 'police',
-            } as never,
-          );
-        }}
-        activeOpacity={0.5}
-        style={{
-          paddingHorizontal: 30,
-          paddingVertical: 20,
-          backgroundColor: '#444647',
-          borderRadius: 10,
-        }}
-      >
-        <Text style={{color: 'black'}}>Ir para policias</Text>
-      </TouchableOpacity>
+      {'\n'}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(
@@ -78,14 +71,23 @@ const Home: React.FC = () => {
         }}
         activeOpacity={0.5}
         style={{
-          paddingHorizontal: 30,
-          paddingVertical: 20,
-          backgroundColor: '#2723ff',
-          borderRadius: 10,
+          height: 120,
+          width: 345,
+          marginTop: 10,
+
+          alignSelf: 'center',
+          alignItems: 'center',
+          display: 'flex',
+          backgroundColor: '#B6DCF1',
+          borderRadius: 20,
         }}
       >
-        <Text style={{color: 'black'}}>Ir para ambulancias</Text>
+        <View style={styles.container}>
+          <Text style={{color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30}}>Samu</Text>
+          <Image style={styles.ImageAmbulance} source={images.carroambulancia} />
+        </View>
       </TouchableOpacity>
+
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(
@@ -97,16 +99,53 @@ const Home: React.FC = () => {
         }}
         activeOpacity={0.5}
         style={{
-          paddingHorizontal: 30,
-          paddingVertical: 20,
-          backgroundColor: '#ff2323',
-          borderRadius: 10,
+          height: 120,
+          width: 345,
+          marginTop: 10,
+
+          alignSelf: 'center',
+          alignItems: 'center',
+          display: 'flex',
+          backgroundColor: '#FDBFBF',
+          borderRadius: 20,
         }}
       >
-        <Text style={{color: 'black'}}>Ir para bombeiros</Text>
+        <View style={styles.container}>
+          <Image style={styles.ImageFireman} source={images.carrobombeiro} />
+          <Text style={{color: 'black', fontWeight: 'bold', fontSize: 30, padding: 30}}>
+            Bombeiro
+          </Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  homeImageUser: {
+    width: 80,
+    height: 80,
+  },
+  container: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+  },
+  ImagePolice: {
+    padding: 60,
+    width: 20,
+    height: 20,
+  },
+  ImageAmbulance: {
+    padding: 50,
+    width: 20,
+    height: 20,
+  },
+  ImageFireman: {
+    padding: 50,
+    width: 20,
+    height: 20,
+  },
+});
