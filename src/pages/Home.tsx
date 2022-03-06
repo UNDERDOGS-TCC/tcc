@@ -31,6 +31,11 @@ const Home: React.FC = () => {
         backgroundColor: '#fff',
       }}
     >
+      <TouchableOpacity onPress={() => navigation.navigate('Signup' as never)}>
+        <View style={{width: 100, height: 50, backgroundColor: '#767676'}}>
+          <Text>Ir Criar conta</Text>
+        </View>
+      </TouchableOpacity>
       <Text
         style={{
           color: 'black',
@@ -40,6 +45,14 @@ const Home: React.FC = () => {
         Eu sou a Home
       </Text>
       <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(
+            'Services' as never,
+            {
+              service: 'police',
+            } as never,
+          );
+        }}
         activeOpacity={0.5}
         style={{
           height: 120,
@@ -59,7 +72,6 @@ const Home: React.FC = () => {
           </Text>
         </View>
       </TouchableOpacity>
-      {'\n'}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(
