@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Animated} from 'react-native';
+import {View, Text, StyleSheet, Animated, TouchableOpacity, Easing} from 'react-native';
 
 const HorizontalTimeline: React.FC = () => {
   const [animation, setAnimation] = useState(new Animated.Value(0));
 
   const handleAnimation = () => {
-    Animated.timing(animation, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
+    Animated.delay(200).start(() => {
+      Animated.timing(animation, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: false,
+        easing: Easing.linear,
+      }).start();
+    });
   };
 
   const boxInterpolation = animation.interpolate({
@@ -18,7 +21,7 @@ const HorizontalTimeline: React.FC = () => {
   });
 
   const animatedStyle = {
-    backgroundColor: boxInterpolation,
+    borderColor: boxInterpolation,
   };
 
   useEffect(() => {
@@ -27,13 +30,6 @@ const HorizontalTimeline: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.circle} />
-      <View style={styles.line}></View>
-      <View style={styles.line}></View>
-      <View style={styles.circle} />
-      <View style={styles.line}></View>
-      <View style={styles.line}></View>
-      <View style={styles.circle} /> */}
       <Animated.View style={{...styles.line, ...animatedStyle}} />
       <Animated.View style={{...styles.line, ...animatedStyle}} />
       <Animated.View style={{...styles.line, ...animatedStyle}} />
