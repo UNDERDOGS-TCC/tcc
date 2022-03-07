@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Animated, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Animated} from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,109 +7,36 @@ const Login: React.FC = () => {
     const images = {
         brasil: require('../../assets/brasil.jpg'),
     };
-    
-    const entrar = () => {
-        navigation.reset({
-            index: 0,
-            routes: [{name: 'Home' as never}]
-        })
-    }
-
-    const [offset] = useState(new Animated.ValueXY({ x: 0, y: 80 }));
-    const [opacity] = useState(new Animated.Value(0));
-    const [logo] = useState(new Animated.ValueXY({ x: 90, y: 90 }));
-
-    useEffect(() => {
-
-        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
-        const KeyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
-
-        Animated.parallel([
-            Animated.spring(offset.y, {
-                toValue: 0,
-                speed: 4,
-                bounciness: 30,
-                useNativeDriver: true,
-            }),
-            Animated.timing(opacity, {
-                toValue: 1,
-                duration: 200,
-                useNativeDriver: true
-            })
-        ]).start();
-    }, []);
-
-    function keyboardDidShow() {
-        Animated.parallel([
-            Animated.timing(logo.x, {
-                toValue: 20,
-                duration: 50,
-                useNativeDriver: true
-            }),
-            Animated.timing(logo.y, {
-                toValue: 25,
-                duration: 50,
-                useNativeDriver: true
-            }),
-        ]).start();
-    }
-
-    function keyboardDidHide() {
-        Animated.parallel([
-            Animated.timing(logo.x, {
-                toValue: 90,
-                duration: 90,
-                useNativeDriver: true
-            }),
-            Animated.timing(logo.y, {
-                toValue: 90,
-                duration: 90,
-                useNativeDriver: true
-            }),
-        ]).start();
-    }
 
     return (
-        <KeyboardAvoidingView style={{ padding: 10, alignItems: 'center', }}>
-
-
-            <View style={styles.container}>
-                <Animated.Image style={{ width: logo.x, height: logo.y, }} source={images.brasil} />
+        <View style={styles.container}>
+            <View >
+            <View style={styles.imageAndText}>
+                <Image style={styles.imageBrasil} source={images.brasil} />
                 <Text style={styles.textServicos}> Serviços{"\n"}
                     <Text style={styles.textPublicos}> Públicos
                     </Text>
                 </Text>
             </View>
 
-            <Animated.View style={[{
-                opacity: opacity,
-                transform: [
-                    { translateY: offset.y }
-                ]
-            }]}>
-                <TextInput style={styles.inputUser}
-                    placeholder="Usuário"
-                />
-                <TextInput style={styles.inputPassword}
-                    secureTextEntry={true}
-                    placeholder="Senha"
-                />
+            <TextInput style={styles.inputUser}
+                placeholder="Usuário"/>
+            <TextInput style={styles.inputPassword}
+                secureTextEntry={true}
+                placeholder="Senha"/>
 
-                <TouchableOpacity style={styles.botao}
-                onPress={() => entrar()}
-                >
-                    <Text style={styles.botaoText}>Entrar</Text>
-                </TouchableOpacity>
+            <TouchableOpacity style={styles.botao}
+            onPress={() => navigation.navigate('Home' as never)}>
+                <Text style={styles.botaoText}>Entrar</Text>
+            </TouchableOpacity>
+            </View>
+            <Text style={{ padding: 20, fontSize: 18, marginTop: 20 }}>Não tem uma conta?</Text>
 
-                <View style={styles.botaoCriarConta}>
-                    <Text style={{ padding: 10, fontSize: 18 }}>Não tem uma conta?</Text>
-                    <TouchableOpacity
-                    >
-                        <Text style={styles.textCriarConta}>Criar conta</Text>
-                    </TouchableOpacity>
-                </View>
-            </Animated.View>
-        </KeyboardAvoidingView>
+            <TouchableOpacity >
+                <Text style={styles.textCriarConta}>Criar conta</Text>
+            </TouchableOpacity>
+            
+        </View>
     );
 };
 
@@ -119,12 +46,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        flexDirection: 'row',
         justifyContent: 'center',
+        marginVertical: 180,
+        marginTop: 80,
     },
     imageBrasil: {
         width: 90,
         height: 90,
+    },
+    imageAndText: {
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
     textServicos: {
         color: '#FFDF00',
@@ -139,8 +73,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     inputUser: {
-        marginTop: 50,
-        width: 300,
+        width: 320,
         height: 40,
         backgroundColor: '#F1F7FD',
         borderWidth: 1,
@@ -151,7 +84,7 @@ const styles = StyleSheet.create({
     },
     inputPassword: {
         marginTop: 20,
-        width: 300,
+        width: 320,
         height: 40,
         backgroundColor: '#F1F7FD',
         borderWidth: 1,
@@ -161,30 +94,17 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     botao: {
-        marginTop: 20,
-        width: 300,
+        marginTop: 30,
+        width: 320,
         height: 40,
         backgroundColor: '#00346C',
-        borderWidth: 1,
         borderRadius: 50,
-        fontSize: 16,
-        padding: 15,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    botaoText: {
+    botaoText: { 
         fontSize: 20,
         color: '#FFFFFF',
-    },
-    botaoCriarConta: {
-        marginTop: 20,
-        width: 300,
-        height: 40,
-        backgroundColor: '#f2f2f2f2',
-        fontSize: 16,
-        padding: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     textCriarConta: {
         color: '#0066FF',
